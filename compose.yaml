@@ -1,0 +1,26 @@
+services:
+  kavita:
+    image: jvmilazz0/kavita:0.8.9
+    container_name: kavita
+    environment:
+      - TZ=${TZ}
+    networks:
+      - default
+      - proxy-network
+    expose:
+      - 5000
+    volumes:
+      - ./books:/books
+      - ./manga:/manga
+      - ./config:/kavita/config
+    restart: unless-stopped
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.kavita.rule=HostRegexp(`${KAVITA_URL}`)"
+      - "traefik.http.routers.kavita.tls=true"
+
+networks:
+  default:
+  proxy-network:
+    external: true
+
