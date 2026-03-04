@@ -16,8 +16,7 @@ services:
     restart: unless-stopped
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.kavita.rule=HostRegexp(`${KAVITA_URL}`)"
-      - "traefik.http.routers.kavita.tls=true"
+      - "traefik.http.routers.kavita.rule=Host(`${KAVITA_URL}`)"
 
 networks:
   default:
